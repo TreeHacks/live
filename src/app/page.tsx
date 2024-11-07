@@ -1,101 +1,108 @@
-import Image from "next/image";
+'use client';
+
+import { faChrome } from '@fortawesome/free-brands-svg-icons';
+import {
+  faArrowUpFromBracket,
+  faEllipsisVertical,
+  faPlus,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { PWAContext } from './PWAProvider';
+import { useContext } from 'react';
+
+function PWAOnboarding({ isIOS }: { isIOS: boolean }) {
+  return (
+    <div className="inset-0 fixed">
+      <div className="m-2 py-8 px-6 rounded-lg bg-theme-300 border-theme-400 border">
+        <div className="text-center">
+          <h1 className="font-semibold text-3xl">Welcome to TreeHacks!</h1>
+          <div className="mt-6">
+            <p>Please follow these steps below to install the app. </p>
+            <p className="mt-2">
+              Installing the app allows us to send you notifications for events
+              and announcements.
+            </p>
+          </div>
+        </div>
+        <div className="flex justify-center">
+          {isIOS ? (
+            <div className="mt-6 flex flex-col gap-2">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center justify-center rounded-md border-theme-400 border-2 h-12 w-12">
+                  <FontAwesomeIcon
+                    icon={faArrowUpFromBracket}
+                    className="flex-grow"
+                    size="lg"
+                  />
+                </div>
+                <div className="font-medium">Tap the share icon below.</div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center justify-center rounded-md border-theme-400 border-2 h-12 w-12">
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    className="flex-grow"
+                    size="lg"
+                  />
+                </div>
+                <div className="font-medium">
+                  Press &quot;Add to home screen&quot;.
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="mt-6 flex flex-col gap-2">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center justify-center rounded-md border-theme-400 border-2 h-12 w-12">
+                  <FontAwesomeIcon
+                    icon={faChrome}
+                    className="flex-grow"
+                    size="lg"
+                  />
+                </div>
+                <div className="font-medium">
+                  Open this site on Android Chrome
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center justify-center rounded-md border-theme-400 border-2 h-12 w-12">
+                  <FontAwesomeIcon
+                    icon={faEllipsisVertical}
+                    className="flex-grow"
+                    size="lg"
+                  />
+                </div>
+                <div className="font-medium">Tap the three-dot icon</div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center justify-center rounded-md border-theme-400 border-2 h-12 w-12">
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    className="flex-grow"
+                    size="lg"
+                  />
+                </div>
+                <div className="font-medium">
+                  Press &apos;Add to Home screen&apos;
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const { isLoading, isPopupDismissed, isIOS, isStandalone, isMobile } =
+    useContext(PWAContext);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  return (
+    <div>
+      {!isLoading && !isPopupDismissed && !isStandalone && isMobile ? (
+        <PWAOnboarding isIOS={isIOS} />
+      ) : null}
     </div>
   );
 }
