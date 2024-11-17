@@ -1,6 +1,6 @@
 'use client';
 
-import { DismissibleContents, isDismissed } from '@/lib/dismissibleContent';
+import { DismissibleContents, isDismissed } from '@/lib/DismissibleContent';
 import { isMobileBrowser } from '@/lib/util';
 import React, { createContext, useEffect, useState } from 'react';
 

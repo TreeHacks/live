@@ -5,7 +5,8 @@ import Navbar from './Navbar';
 
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import PWAProvider from './PWAProvider';
+import PWAProvider from '../lib/PWAProvider';
+import ScheduleProvider from '@/lib/ScheduleProvider';
 config.autoAddCss = false;
 
 const fredokaSans = Fredoka({});
@@ -22,12 +23,14 @@ export default function RootLayout({
 }>) {
   return (
     <PWAProvider>
-      <html lang="en">
-        <body className={`${fredokaSans.className} antialiased`}>
-          <Navbar />
-          {children}
-        </body>
-      </html>
+      <ScheduleProvider>
+        <html lang="en">
+          <body className={`${fredokaSans.className} antialiased`}>
+            <Navbar />
+            {children}
+          </body>
+        </html>
+      </ScheduleProvider>
     </PWAProvider>
   );
 }

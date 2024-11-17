@@ -4,7 +4,7 @@
 
 :root {
   --background: #f1f8f3;
-  --foreground: #0d1609;
+  --foreground: #080e06;
 
   --theme-100: #f1f8f3;
   --theme-200: #e4f1e8;
@@ -19,10 +19,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0d1609;
+    --background: #080e06;
     --foreground: #f1f8f3;
 
-    --theme-100: #0d1609;
+    --theme-100: #080e06;
     --theme-200: #101a0b;
     --theme-300: #16240f;
     --theme-400: #1f3215;

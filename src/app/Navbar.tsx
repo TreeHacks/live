@@ -12,7 +12,7 @@ interface NavItemProps {
 function NavItem({ children, href }: NavItemProps) {
   return (
     <Link
-      className="px-2 rounded-md hover:bg-black/10 transition text-lg"
+      className="px-2 transition text-md text-foreground opacity-60 hover:opacity-100 font-medium"
       href={href}
     >
       {children}
@@ -22,16 +22,19 @@ function NavItem({ children, href }: NavItemProps) {
 
 export default function Navbar() {
   return (
-    <div className="w-full flex items-center justify-center my-4 font-medium text-brand-400">
-      <div className="bg-theme-300 w-[90%] max-w-[62rem] backdrop-blur-lg py-2 px-4 mx-auto rounded-lg border border-black/10 dark:border-white/10">
-        <div className="flex gap-2 items-center ">
+    <div className="w-full flex items-center justify-center my-4 text-brand-400 fixed top-0 z-10">
+      <div className="w-[90%] max-w-5xl backdrop-blur-lg py-2 px-4 mx-auto rounded-full border border-black/10 dark:border-white/10">
+        <div className="flex gap-2 items-center justify-center sm:justify-normal">
           <Image
             src={wordmarkSvg}
             alt="TreeHacks Live logo"
             className="h-8 w-auto"
           />
-          <div className="hidden md:flex">
+          <div className="hidden sm:flex ml-auto">
             <NavItem href="/schedule">Schedule</NavItem>
+            <NavItem href="/packs">Devpost</NavItem>
+            <NavItem href="/packs">FAQs</NavItem>
+            <NavItem href="/packs">Resources</NavItem>
           </div>
         </div>
       </div>
