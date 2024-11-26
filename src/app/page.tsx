@@ -173,6 +173,7 @@ function ScheduleItem({
 }
 
 import headerImage from './assets/event-stairs-2024.jpg';
+import Countdown from './components/Countdown';
 
 export default function Home() {
   const { isLoading, isPopupDismissed, isIOS, isStandalone, isMobile } =
@@ -211,13 +212,15 @@ export default function Home() {
       <div className="h-[60vh] md:h-[55vh] relative">
         <Image
           src={headerImage}
-          className="w-full h-full object-cover object-top absolute top-0 -z-10 pointer-events-none"
+          className="w-full h-full object-cover object-top absolute top-0 -z-10 pointer-events-none blur-sm"
           alt="Big block letters of TreeHacks 2024"
         />
-        <div className="z-10 pt-28 px-12 max-w-5xl mx-auto">
-          <div className="rounded-xl border border-black/10 dark:border-white/10 flex-shrink p-4 backdrop-blur-md bg-gray-900/20 text-center">
-            <div className="text-8xl font-bold">00:00:00:00</div>
-            <div className="font-medium text-3xl">until hacking begins</div>
+        <div className="w-full h-full flex items-center justify-center text-white">
+          <div className="text-center">
+            <div className="text-9xl font-semibold font-mono">
+              <Countdown />
+            </div>
+            <div className="font-medium text-4xl">until hacking begins</div>
           </div>
         </div>
       </div>

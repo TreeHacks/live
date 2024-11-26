@@ -24,6 +24,9 @@ const config: Config = {
           '400': 'var(--brand-400)',
         },
       },
+      fontFamily: {
+        mono: ['var(--font-mono)'],
+      },
     },
   },
   plugins: [],
