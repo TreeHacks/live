@@ -9,10 +9,13 @@ import PWAProvider from '../lib/PWAProvider';
 import ScheduleProvider from '@/lib/ScheduleProvider';
 config.autoAddCss = false;
 
-const fredokaSans = Fredoka({});
+const fredokaSans = Fredoka({
+  subsets: ['latin'],
+});
 const monoFont = Ubuntu_Mono({
   weight: ['400', '700'],
   variable: '--font-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {

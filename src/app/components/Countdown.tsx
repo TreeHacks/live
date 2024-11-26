@@ -9,7 +9,6 @@ function Digit({ value, maxVal = 9 }: { value: number; maxVal?: number }) {
   const [isChanging, setChanging] = React.useState(false);
   const [curr, setCurr] = React.useState(value);
   const nextVal = (((curr - 1) % (maxVal + 1)) + (maxVal + 1)) % (maxVal + 1);
-  console.log(nextVal);
 
   useEffect(() => {
     if (value == curr) {

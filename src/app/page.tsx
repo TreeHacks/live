@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PWAContext } from '../lib/PWAProvider';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import Link from 'next/link';
 import { ScheduleContext } from '@/lib/ScheduleProvider';
@@ -174,6 +174,7 @@ function ScheduleItem({
 
 import headerImage from './assets/event-stairs-2024.jpg';
 import Countdown from './components/Countdown';
+import SegmentedControl from './components/SegmentedControl';
 
 export default function Home() {
   const { isLoading, isPopupDismissed, isIOS, isStandalone, isMobile } =
@@ -204,6 +205,9 @@ export default function Home() {
     );
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [scheduleFilter, setScheduleFilter] = useState('upcoming');
+
   return (
     <div>
       {!isLoading && !isPopupDismissed && !isStandalone && isMobile ? (
@@ -229,14 +233,13 @@ export default function Home() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-4 max-w-5xl mx-auto mt-12">
         <div className="col-span-2">
           <h1 className="text-3xl font-semibold">TreeHacks Schedule</h1>
-          <div className="flex mt-4">
-            <div className="rounded-full p-1 border border-black/10 dark:border-white/10 gap-1 flex">
-              <button className="px-2 py-1 rounded-full bg-theme-300">
-                Upcoming
-              </button>
-              <button className="px-2 py-1 rounded-full">Past</button>
-            </div>
-          </div>
+          <SegmentedControl
+            options={[
+              { id: 'upcoming', label: 'Upcoming' },
+              { id: 'past', label: 'Past' },
+            ]}
+            onSelect={setScheduleFilter}
+          />
           <div className="flex flex-col gap-4 mt-4 p-4 border-l border-black/20 dark:border-white/20">
             <ScheduleItem
               title="Test Event"
