@@ -1,11 +1,5 @@
 import type { Metadata } from 'next';
-import {
-  Fredoka,
-  JetBrains_Mono,
-  Roboto_Mono,
-  Space_Mono,
-  Ubuntu_Mono,
-} from 'next/font/google';
+import { Fredoka, Ubuntu_Mono } from 'next/font/google';
 import './style/globals.css';
 import Navbar from './components/Navbar';
 
