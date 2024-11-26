@@ -209,7 +209,7 @@ export default function Home() {
       {!isLoading && !isPopupDismissed && !isStandalone && isMobile ? (
         <PWAOnboarding isIOS={isIOS} />
       ) : null}
-      <div className="h-[60vh] md:h-[55vh] relative">
+      <div className="h-[40vh] md:h-[55vh] relative">
         <Image
           src={headerImage}
           className="w-full h-full object-cover object-top absolute top-0 -z-10 pointer-events-none blur-sm"
@@ -217,10 +217,12 @@ export default function Home() {
         />
         <div className="w-full h-full flex items-center justify-center text-white">
           <div className="text-center">
-            <div className="text-9xl font-semibold font-mono">
+            <div className="text-6xl md:text-9xl font-semibold font-mono">
               <Countdown />
             </div>
-            <div className="font-medium text-4xl">until hacking begins</div>
+            <div className="font-medium text-2xl md:text-4xl">
+              until hacking begins
+            </div>
           </div>
         </div>
       </div>
