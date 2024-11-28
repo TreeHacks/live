@@ -19,10 +19,12 @@ function Digit({ value, maxVal = 9 }: { value: number; maxVal?: number }) {
     setChanging(true);
 
     // After animation is done, revert to static components
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setCurr(value);
       setChanging(false);
     }, 500);
+
+    return () => clearTimeout(timeout);
   }, [value, curr]);
 
   const currAnimation = {
@@ -71,7 +73,7 @@ function getDuration() {
   return next - now;
 }
 
-export default function Countdown() {
+export default React.memo(function Countdown() {
   const [duration, setDuration] = React.useState(() => getDuration());
 
   // Update the time every minute
@@ -120,4 +122,4 @@ export default function Countdown() {
       <Digit value={secondSecondDigit} />
     </div>
   );
-}
+});

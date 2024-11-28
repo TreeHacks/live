@@ -216,7 +216,7 @@ export default function Home() {
       <div className="h-[40vh] md:h-[55vh] relative">
         <Image
           src={headerImage}
-          className="w-full h-full object-cover object-top absolute top-0 -z-10 pointer-events-none blur-sm"
+          className="w-full h-full object-cover object-top absolute top-0 -z-10 pointer-events-none blur-md"
           alt="Big block letters of TreeHacks 2024"
         />
         <div className="w-full h-full flex items-center justify-center text-white">
