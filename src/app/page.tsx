@@ -213,7 +213,7 @@ export default function Home() {
       {!isLoading && !isPopupDismissed && !isStandalone && isMobile ? (
         <PWAOnboarding isIOS={isIOS} />
       ) : null}
-      <div className="h-[40vh] md:h-[55vh] relative">
+      <div className="h-[25vh] md:h-[55vh] relative">
         <Image
           src={headerImage}
           className="w-full h-full object-cover object-top absolute top-0 -z-10 pointer-events-none blur-md"

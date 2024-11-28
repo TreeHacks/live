@@ -28,11 +28,11 @@ function Digit({ value, maxVal = 9 }: { value: number; maxVal?: number }) {
   }, [value, curr]);
 
   const currAnimation = {
-    y: isChanging ? '100%' : 0,
+    y: isChanging ? '50%' : 0,
     opacity: isChanging ? 0 : 1,
   };
   const nextAnimation = {
-    y: isChanging ? 0 : '-100%',
+    y: isChanging ? 0 : '-50%',
     opacity: isChanging ? 1 : 0,
   };
 
