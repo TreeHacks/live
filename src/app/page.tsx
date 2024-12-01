@@ -101,112 +101,13 @@ function PWAOnboarding({ isIOS }: { isIOS: boolean }) {
   );
 }
 
-interface CircleButtonProps {
-  onClick?: () => void;
-  href?: string;
-  icon: IconProp;
-}
-
-interface ScheduleItemProps {
-  title: string;
-  description?: string;
-  location?: string;
-  href?: string;
-  date: string;
-  time: string;
-}
-
-function CircleButton({ onClick, href, icon }: CircleButtonProps) {
-  const toReturn = (
-    <button
-      className="w-7 h-7 rounded-full border bg-theme-200 border-black/10 dark:border-white/10"
-      onClick={onClick}
-    >
-      <FontAwesomeIcon icon={icon} />
-    </button>
-  );
-
-  if (href != null) {
-    return (
-      <Link href={href} target="_blank">
-        {toReturn}
-      </Link>
-    );
-  }
-
-  return toReturn;
-}
-
-function ScheduleItem({
-  title,
-  description,
-  location,
-  href,
-  date,
-  time,
-}: ScheduleItemProps) {
-  return (
-    <div className="relative">
-      <div className="w-2 h-2 rounded-full bg-black dark:bg-white absolute -left-5 top-2.5" />
-      <div className="text-lg">
-        <span className="font-semibold">{date}</span> — {time}
-        <div className="text-sm absolute right-0 top-0 flex gap-2">
-          <CircleButton icon={faBell} />
-          {href != null ? (
-            <CircleButton icon={faExternalLink} href={href} />
-          ) : null}
-        </div>
-      </div>
-      <div className="mt-2 rounded-xl border bg-theme-200 border-black/10 dark:border-white/10">
-        <div className="p-3">
-          <div className="font-semibold text-lg">{title}</div>
-          <div className="mt-1 text-black/90 dark:text-white/90">
-            {description || 'Welcome to TreeHacks 2025! Test test'}
-          </div>
-          <div className="mt-1 text-black/80 dark:text-white/80">
-            <FontAwesomeIcon icon={faLocationDot} /> {location || 'TBD'}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 import headerImage from './assets/event-stairs-2024.jpg';
 import Countdown from './components/Countdown';
-import SegmentedControl from './components/SegmentedControl';
+import Schedule from './components/Schedule';
 
 export default function Home() {
   const { isLoading, isPopupDismissed, isIOS, isStandalone, isMobile } =
     useContext(PWAContext);
-
-  const { schedule } = useContext(ScheduleContext);
-  const events = schedule.map((event) => {
-    const date = Date.parse(event.start_time);
-    const dayOfWeek = new Intl.DateTimeFormat('en-US', {
-      weekday: 'long',
-    }).format(date);
-    // Get the time formatted like this: 8:00 AM
-    const time = new Intl.DateTimeFormat('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    }).format(date);
-
-    return (
-      <ScheduleItem
-        key={event.id}
-        title={event.title}
-        description={event.description}
-        date={dayOfWeek}
-        time={time}
-        location={event.location}
-      />
-    );
-  });
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [scheduleFilter, setScheduleFilter] = useState('upcoming');
 
   return (
     <div>
@@ -233,24 +134,7 @@ export default function Home() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-4 max-w-5xl mx-auto mt-12">
         <div className="col-span-2">
           <h1 className="text-3xl font-semibold">TreeHacks Schedule</h1>
-          <SegmentedControl
-            options={[
-              { id: 'upcoming', label: 'Upcoming' },
-              { id: 'past', label: 'Past' },
-            ]}
-            onSelect={setScheduleFilter}
-          />
-          <div className="flex flex-col gap-4 mt-4 p-4 border-l border-black/20 dark:border-white/20">
-            <ScheduleItem
-              title="Test Event"
-              description="An event for testing things."
-              date="Friday"
-              time="8:00 AM"
-              href="https://google.com"
-              location="Hewlett 200"
-            />
-            {events}
-          </div>
+          <Schedule />
         </div>
         <div className="col-span-1">
           <h1 className="text-3xl font-semibold">Welcome!</h1>
