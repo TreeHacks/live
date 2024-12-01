@@ -8,10 +8,8 @@ import {
   faCalendarAlt,
   faCode,
   faHammer,
-  faInfo,
   faInfoCircle,
 } from '@fortawesome/free-solid-svg-icons';
-import { faDev } from '@fortawesome/free-brands-svg-icons';
 
 interface NavItemProps {
   children: React.ReactNode;
