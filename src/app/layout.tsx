@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Fredoka, Ubuntu_Mono } from 'next/font/google';
+import { Fredoka, Reddit_Mono } from 'next/font/google';
 import './style/globals.css';
 import Navbar from './components/Navbar';
 
@@ -12,7 +12,7 @@ config.autoAddCss = false;
 const fredokaSans = Fredoka({
   subsets: ['latin'],
 });
-const monoFont = Ubuntu_Mono({
+const monoFont = Reddit_Mono({
   weight: ['400', '700'],
   variable: '--font-mono',
   subsets: ['latin'],

@@ -3,31 +3,24 @@
 import { faChrome } from '@fortawesome/free-brands-svg-icons';
 import {
   faArrowUpFromBracket,
-  faBell,
   faEllipsisVertical,
-  faExternalLink,
-  faLocationDot,
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PWAContext } from '../lib/PWAProvider';
-import { useContext, useState } from 'react';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import Link from 'next/link';
-import { ScheduleContext } from '@/lib/ScheduleProvider';
+import { useContext } from 'react';
 import Image from 'next/image';
 
 function PWAOnboarding({ isIOS }: { isIOS: boolean }) {
   return (
-    <div className="inset-0 fixed z-10">
+    <div className="inset-0 fixed z-10 backdrop-blur-sm">
       <div className="m-2 py-8 px-6 rounded-lg bg-theme-300 border-theme-400 border">
         <div className="text-center">
           <h1 className="font-semibold text-3xl">Welcome to TreeHacks!</h1>
           <div className="mt-6">
-            <p>Please follow these steps below to install the app. </p>
-            <p className="mt-2">
-              Installing the app allows us to send you notifications for events
-              and announcements.
+            <p className="">
+              Please install the TreeHacks app so we can notify you about events
+              an announcements throughout the hackathon!
             </p>
           </div>
         </div>
@@ -96,14 +89,23 @@ function PWAOnboarding({ isIOS }: { isIOS: boolean }) {
             </div>
           )}
         </div>
+        <div className="flex items-center justify-center mt-4">
+          <button
+            className="underline opacity-80"
+            onClick={() => dismiss(DismissibleContents.PWAPopoutDismissed)}
+          >
+            No thanks.
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
-import headerImage from './assets/event-stairs-2024.jpg';
+import headerImage from './assets/header-blur.jpg';
 import Countdown from './components/Countdown';
 import Schedule from './components/Schedule';
+import { dismiss, DismissibleContents } from '@/lib/DismissibleContent';
 
 export default function Home() {
   const { isLoading, isPopupDismissed, isIOS, isStandalone, isMobile } =
@@ -117,12 +119,12 @@ export default function Home() {
       <div className="h-[25vh] md:h-[55vh] relative">
         <Image
           src={headerImage}
-          className="w-full h-full object-cover object-top absolute top-0 -z-10 pointer-events-none blur-md"
+          className="w-full h-full object-cover object-top absolute top-0 -z-10 pointer-events-none"
           alt="Big block letters of TreeHacks 2024"
         />
         <div className="w-full h-full flex items-center justify-center text-white">
           <div className="text-center">
-            <div className="text-6xl md:text-9xl font-semibold font-mono">
+            <div className="text-5xl md:text-9xl font-semibold font-mono">
               <Countdown />
             </div>
             <div className="font-medium text-2xl md:text-4xl">
