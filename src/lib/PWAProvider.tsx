@@ -1,6 +1,5 @@
 'use client';
 
-import { DismissibleContents, isDismissed } from '@/lib/DismissibleContent';
 import { isMobileBrowser } from '@/lib/util';
 import React, { createContext, useEffect, useState } from 'react';
 
@@ -9,7 +8,6 @@ interface PWAContextValue {
   isStandalone: boolean;
   isLoading: boolean;
   isMobile: boolean;
-  isPopupDismissed: boolean;
 }
 
 export const PWAContext = createContext<PWAContextValue>({
@@ -17,7 +15,6 @@ export const PWAContext = createContext<PWAContextValue>({
   isStandalone: false,
   isLoading: true,
   isMobile: false,
-  isPopupDismissed: false,
 });
 
 export default function PWAProvider({
@@ -29,7 +26,6 @@ export default function PWAProvider({
   const [isStandalone, setIsStandalone] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
-  const [isPopupDismissed, setIsPopupDismissed] = useState(false);
 
   useEffect(() => {
     setIsIOS(
@@ -40,13 +36,10 @@ export default function PWAProvider({
     setIsStandalone(window.matchMedia('(display-mode: standalone)').matches);
     setIsLoading(false);
     setIsMobile(isMobileBrowser());
-    setIsPopupDismissed(isDismissed(DismissibleContents.PWAPopoutDismissed));
   }, []);
 
   return (
-    <PWAContext.Provider
-      value={{ isIOS, isStandalone, isLoading, isMobile, isPopupDismissed }}
-    >
+    <PWAContext.Provider value={{ isIOS, isStandalone, isLoading, isMobile }}>
       {children}
     </PWAContext.Provider>
   );

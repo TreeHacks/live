@@ -10,8 +10,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PWAContext } from '../lib/PWAProvider';
 import { useContext } from 'react';
 import Image from 'next/image';
+import headerImage from './assets/building.jpg';
+import Countdown from './components/Countdown';
+import Schedule from './components/Schedule';
+import { StoreData, useStorage } from '@/lib/StorageProvider';
 
 function PWAOnboarding({ isIOS }: { isIOS: boolean }) {
+  const [_, setKey] = useStorage(StoreData.PWAPopoutDismissed);
+
   return (
     <div className="inset-0 fixed z-10 backdrop-blur-sm">
       <div className="m-2 py-8 px-6 rounded-lg bg-theme-300 border-theme-400 border">
@@ -90,10 +96,7 @@ function PWAOnboarding({ isIOS }: { isIOS: boolean }) {
           )}
         </div>
         <div className="flex items-center justify-center mt-4">
-          <button
-            className="underline opacity-80"
-            onClick={() => dismiss(DismissibleContents.PWAPopoutDismissed)}
-          >
+          <button className="underline opacity-80" onClick={() => setKey(true)}>
             No thanks.
           </button>
         </div>
@@ -102,14 +105,9 @@ function PWAOnboarding({ isIOS }: { isIOS: boolean }) {
   );
 }
 
-import headerImage from './assets/header-blur.jpg';
-import Countdown from './components/Countdown';
-import Schedule from './components/Schedule';
-import { dismiss, DismissibleContents } from '@/lib/DismissibleContent';
-
 export default function Home() {
-  const { isLoading, isPopupDismissed, isIOS, isStandalone, isMobile } =
-    useContext(PWAContext);
+  const { isLoading, isIOS, isStandalone, isMobile } = useContext(PWAContext);
+  const [isPopupDismissed] = useStorage(StoreData.PWAPopoutDismissed);
 
   return (
     <div>
@@ -119,7 +117,7 @@ export default function Home() {
       <div className="h-[25vh] md:h-[55vh] relative">
         <Image
           src={headerImage}
-          className="w-full h-full object-cover object-top absolute top-0 -z-10 pointer-events-none"
+          className="w-full h-full object-cover object-bottom absolute top-0 -z-10 pointer-events-none"
           alt="Big block letters of TreeHacks 2024"
         />
         <div className="w-full h-full flex items-center justify-center text-white">
