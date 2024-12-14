@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PWAContext } from '../lib/PWAProvider';
 import { useContext } from 'react';
 import Image from 'next/image';
-import headerImage from './assets/building.jpg';
+import headerImage from './assets/event-stairs-2024.jpg';
 import Countdown from './components/Countdown';
 import Schedule from './components/Schedule';
 import { StoreData, useStorage } from '@/lib/StorageProvider';

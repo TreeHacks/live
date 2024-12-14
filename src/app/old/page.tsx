@@ -137,7 +137,7 @@ function InstallPrompt() {
 
 export default function Home() {
   return (
-    <div>
+    <div className="mt-48">
       <PushNotificationManager />
       <InstallPrompt />
     </div>

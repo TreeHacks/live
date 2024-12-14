@@ -3,13 +3,17 @@ import SegmentedControl from './SegmentedControl';
 import CircleButton from './CircleButton';
 import {
   faBell,
+  faCheck,
+  faCircleNotch,
   faExternalLink,
   faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ScheduleContext } from '@/lib/ScheduleProvider';
+import { PushContext } from '@/lib/PushProvider';
 
 interface ScheduleItemProps {
+  id: string;
   title: string;
   description?: string;
   location?: string;
@@ -19,6 +23,7 @@ interface ScheduleItemProps {
 }
 
 function ScheduleItem({
+  id,
   title,
   description,
   location,
@@ -26,13 +31,42 @@ function ScheduleItem({
   date,
   time,
 }: ScheduleItemProps) {
+  const {
+    subscribedEvents,
+    subscribeToEvent,
+    unsubscribeFromEvent,
+    loadingSubscriptions,
+  } = useContext(PushContext);
+
+  const isSubscribed = subscribedEvents.includes(id);
+  const [loading, setLoading] = useState(false);
+
+  async function pressNotify() {
+    setLoading(true);
+    if (isSubscribed) {
+      await unsubscribeFromEvent(id);
+    } else {
+      await subscribeToEvent(id);
+    }
+    setLoading(false);
+  }
+
   return (
     <div className="relative">
       <div className="w-2 h-2 rounded-full bg-black dark:bg-white absolute -left-5 top-2.5" />
       <div className="text-lg">
         <span className="font-semibold">{date}</span> — {time}
         <div className="text-sm absolute right-0 top-0 flex gap-2">
-          <CircleButton icon={faBell} />
+          {loading || loadingSubscriptions ? (
+            <CircleButton icon={faCircleNotch} iconClassName="animate-spin" />
+          ) : (
+            <CircleButton
+              icon={isSubscribed ? faCheck : faBell}
+              onClick={() => pressNotify()}
+            >
+              {isSubscribed ? 'Subscribed' : 'Notify'}
+            </CircleButton>
+          )}
           {href != null ? (
             <CircleButton icon={faExternalLink} href={href} />
           ) : null}
@@ -97,6 +131,7 @@ export default React.memo(function Schedule() {
           return (
             <ScheduleItem
               key={event.id}
+              id={event.id}
               title={event.title}
               description={event.description}
               date={dayOfWeek}
@@ -120,6 +155,7 @@ export default React.memo(function Schedule() {
       />
       <div className="flex flex-col gap-4 mt-4 p-4 border-l border-black/20 dark:border-white/20">
         <ScheduleItem
+          id="test"
           title="Test Event"
           description="An event for testing things."
           date="Friday"

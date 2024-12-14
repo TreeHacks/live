@@ -8,6 +8,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import PWAProvider from '../lib/PWAProvider';
 import ScheduleProvider from '@/lib/ScheduleProvider';
 import StorageProvider from '@/lib/StorageProvider';
+import PushProvider from '@/lib/PushProvider';
 config.autoAddCss = false;
 
 const fredokaSans = Fredoka({
@@ -31,18 +32,20 @@ export default function RootLayout({
 }>) {
   return (
     <PWAProvider>
-      <StorageProvider>
-        <ScheduleProvider>
-          <html lang="en">
-            <body
-              className={`${fredokaSans.className} ${monoFont.variable} antialiased`}
-            >
-              <Navbar />
-              {children}
-            </body>
-          </html>
-        </ScheduleProvider>
-      </StorageProvider>
+      <PushProvider>
+        <StorageProvider>
+          <ScheduleProvider>
+            <html lang="en">
+              <body
+                className={`${fredokaSans.className} ${monoFont.variable} antialiased`}
+              >
+                <Navbar />
+                {children}
+              </body>
+            </html>
+          </ScheduleProvider>
+        </StorageProvider>
+      </PushProvider>
     </PWAProvider>
   );
 }
