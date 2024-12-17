@@ -44,17 +44,23 @@ export default function PushProvider({
   }, []);
 
   async function registerServiceWorker() {
-    const registration = await navigator.serviceWorker.register('/sw.js', {
-      scope: '/',
-      updateViaCache: 'none',
-    });
-    const sub = await registration.pushManager.getSubscription();
-    setSubscription(sub);
+    try {
+      const registration = await navigator.serviceWorker.register('/sw.js', {
+        scope: '/',
+        updateViaCache: 'none',
+      });
+      const sub = await registration.pushManager.getSubscription();
+      setSubscription(sub);
 
-    // Get the current subscriptions
-    if (sub != null) {
-      const subs = await getEventSubscriptions(sub);
-      setSubscribedEvents(subs);
+      // Get the current subscriptions
+      if (sub != null) {
+        const subs = await getEventSubscriptions(sub);
+        setSubscribedEvents(subs);
+      }
+
+      setLoadingSubscriptions(false);
+    } catch (_) {
+      alert('Please allow notifications to subscribe to events.');
       setLoadingSubscriptions(false);
     }
   }

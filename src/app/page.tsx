@@ -108,19 +108,19 @@ function PWAOnboarding({ isIOS }: { isIOS: boolean }) {
 export default function Home() {
   const { isLoading, isIOS, isStandalone, isMobile } = useContext(PWAContext);
   const [isPopupDismissed] = useStorage(StoreData.PWAPopoutDismissed);
+  const showPWAOnboarding =
+    !isLoading && !isPopupDismissed && !isStandalone && isMobile;
 
   return (
     <div>
-      {!isLoading && !isPopupDismissed && !isStandalone && isMobile ? (
-        <PWAOnboarding isIOS={isIOS} />
-      ) : null}
+      {showPWAOnboarding ? <PWAOnboarding isIOS={isIOS} /> : null}
       <div className="h-[25vh] md:h-[55vh] relative">
         <Image
           src={headerImage}
-          className="w-full h-full object-cover object-bottom absolute top-0 -z-10 pointer-events-none"
+          className="w-full h-full object-cover object-top absolute top-0 -z-10 pointer-events-none"
           alt="Big block letters of TreeHacks 2024"
         />
-        <div className="w-full h-full flex items-center justify-center text-white">
+        <div className="w-full h-full flex items-center justify-center text-white dark:bg-black/50">
           <div className="text-center">
             <div className="text-5xl md:text-9xl font-semibold font-mono">
               <Countdown />
@@ -131,7 +131,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-4 max-w-5xl mx-auto mt-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-4 max-w-5xl mx-auto sm:mt-12 mt-6">
         <div className="col-span-2">
           <h1 className="text-3xl font-semibold">TreeHacks Schedule</h1>
           <Schedule />

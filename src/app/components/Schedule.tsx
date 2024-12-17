@@ -11,6 +11,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ScheduleContext } from '@/lib/ScheduleProvider';
 import { PushContext } from '@/lib/PushProvider';
+import { StoreData, useStorage } from '@/lib/StorageProvider';
 
 interface ScheduleItemProps {
   id: string;
@@ -36,7 +37,9 @@ function ScheduleItem({
     subscribeToEvent,
     unsubscribeFromEvent,
     loadingSubscriptions,
+    pushSupported,
   } = useContext(PushContext);
+  const [_, setKey] = useStorage(StoreData.PWAPopoutDismissed);
 
   const isSubscribed = subscribedEvents.includes(id);
   const [loading, setLoading] = useState(false);
@@ -57,7 +60,11 @@ function ScheduleItem({
       <div className="text-lg">
         <span className="font-semibold">{date}</span> — {time}
         <div className="text-sm absolute right-0 top-0 flex gap-2">
-          {loading || loadingSubscriptions ? (
+          {!pushSupported ? (
+            <CircleButton icon={faBell} onClick={() => setKey(false)}>
+              Install App
+            </CircleButton>
+          ) : loading || loadingSubscriptions ? (
             <CircleButton icon={faCircleNotch} iconClassName="animate-spin" />
           ) : (
             <CircleButton
