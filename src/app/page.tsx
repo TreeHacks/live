@@ -113,10 +113,10 @@ export default function Home() {
   return (
     <div>
       {showPWAOnboarding ? <PWAOnboarding isIOS={isIOS} /> : null}
-      <div className="h-[25vh] md:h-[65vh] relative">
+      <div className="h-[35vh] md:h-[65vh] relative">
         <HeaderArt />
-        <div className="w-full h-full flex items-center justify-center text-white dark:bg-black/50">
-          <div className="text-center mt-24">
+        <div className="w-screen h-full flex items-center justify-center text-white dark:bg-black/50">
+          <div className="text-center my-24">
             <div className="text-5xl md:text-9xl font-semibold font-mono">
               <Countdown />
             </div>

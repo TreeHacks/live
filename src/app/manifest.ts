@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       'Your home for all things on event day: schedule, hackpacks, and more.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#019153',
+    background_color: '#070f11',
+    theme_color: '#070f11',
     icons: [
       {
         src: '/icon-192x192.png',

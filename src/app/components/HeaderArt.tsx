@@ -3,13 +3,11 @@ import React from 'react';
 export default function HeaderArt() {
   return (
     <svg
-      width="1728"
-      height="1120"
       viewBox="0 0 1728 1120"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      preserveAspectRatio="xMinYMin slice"
-      className="w-full h-full absolute top-0 -z-10"
+      preserveAspectRatio="xMidYMid slice"
+      className="w-full h-full absolute -z-10"
     >
       <g clipPath="url(#clip0_226_309)">
         <mask

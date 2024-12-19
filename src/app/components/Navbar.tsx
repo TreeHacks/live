@@ -38,13 +38,13 @@ export default function Navbar() {
             className="h-8 w-auto hidden sm:flex"
           />
           <div className="hidden sm:flex ml-auto">
-            <NavItem href="/schedule">Schedule</NavItem>
+            <NavItem href="/">Schedule</NavItem>
             <NavItem href="/packs">Devpost</NavItem>
             <NavItem href="/packs">FAQs</NavItem>
             <NavItem href="/packs">Resources</NavItem>
           </div>
           <div className="flex gap-2 sm:hidden text-2xl">
-            <NavItem href="/schedule">
+            <NavItem href="/">
               <FontAwesomeIcon icon={faCalendarAlt} />
               <div className="text-xs">Schedule</div>
             </NavItem>
