@@ -38,11 +38,14 @@ function Digit({ value, maxVal = 9 }: { value: number; maxVal?: number }) {
 
   return (
     <div className="relative">
-      <div className={isChanging ? 'opacity-0' : ''}>{curr}</div>
+      <div className={isChanging ? 'opacity-0' : ''} suppressHydrationWarning>
+        {curr}
+      </div>
       <motion.div
         className={`absolute top-0 ${isChanging ? '' : 'hidden'}`}
         animate={currAnimation}
         transition={transition}
+        suppressHydrationWarning
       >
         {curr}
       </motion.div>
@@ -50,6 +53,7 @@ function Digit({ value, maxVal = 9 }: { value: number; maxVal?: number }) {
         className={`absolute top-0 ${isChanging ? '' : 'hidden'}`}
         animate={nextAnimation}
         transition={transition}
+        suppressHydrationWarning
       >
         {nextVal}
       </motion.div>
