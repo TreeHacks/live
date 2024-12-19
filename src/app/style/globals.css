@@ -19,13 +19,13 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #080e06;
+    --background: #070f11;
     --foreground: #f1f8f3;
 
     --theme-100: #080e06;
-    --theme-200: #101a0b;
-    --theme-300: #16240f;
-    --theme-400: #1f3215;
+    --theme-200: #061c11;
+    --theme-300: #072617;
+    --theme-400: #082f1d;
   }
 }
 

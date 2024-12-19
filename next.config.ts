@@ -1,7 +1,14 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: '/api/:slug*',
+        destination: 'http://localhost:9000/api/:slug*',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

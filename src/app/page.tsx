@@ -9,11 +9,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PWAContext } from '../lib/PWAProvider';
 import { useContext } from 'react';
-import Image from 'next/image';
-import headerImage from './assets/event-stairs-2024.jpg';
 import Countdown from './components/Countdown';
 import Schedule from './components/Schedule';
 import { StoreData, useStorage } from '@/lib/StorageProvider';
+import HeaderArt from './components/HeaderArt';
 
 function PWAOnboarding({ isIOS }: { isIOS: boolean }) {
   const [_, setKey] = useStorage(StoreData.PWAPopoutDismissed);
@@ -114,14 +113,10 @@ export default function Home() {
   return (
     <div>
       {showPWAOnboarding ? <PWAOnboarding isIOS={isIOS} /> : null}
-      <div className="h-[25vh] md:h-[55vh] relative">
-        <Image
-          src={headerImage}
-          className="w-full h-full object-cover object-top absolute top-0 -z-10 pointer-events-none"
-          alt="Big block letters of TreeHacks 2024"
-        />
+      <div className="h-[25vh] md:h-[65vh] relative">
+        <HeaderArt />
         <div className="w-full h-full flex items-center justify-center text-white dark:bg-black/50">
-          <div className="text-center">
+          <div className="text-center mt-24">
             <div className="text-5xl md:text-9xl font-semibold font-mono">
               <Countdown />
             </div>
