@@ -41,6 +41,11 @@ export default function RootLayout({
               >
                 <Navbar />
                 {children}
+                <footer>
+                  <div className="flex items-center justify-center py-8 text-center text-md">
+                    <p>Made with ❤️ by the TreeHacks team.</p>
+                  </div>
+                </footer>
               </body>
             </html>
           </ScheduleProvider>
