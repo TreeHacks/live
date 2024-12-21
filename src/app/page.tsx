@@ -113,7 +113,7 @@ export default function Home() {
   return (
     <div>
       {showPWAOnboarding ? <PWAOnboarding isIOS={isIOS} /> : null}
-      <div className="h-[35vh] md:h-[65vh] relative">
+      <div className="h-[35vh] md:h-[45vh] relative">
         <HeaderArt />
         <div className="w-screen h-full flex items-center justify-center text-white dark:bg-black/50">
           <div className="text-center my-24">
