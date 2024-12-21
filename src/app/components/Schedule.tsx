@@ -112,8 +112,8 @@ function ScheduleItem({
         </div>
       </div>
       <div
-        className={`mt-2 rounded-xl border bg-theme-200 border-black/10 dark:border-white/10 ${
-          isHappeningNow ? 'bg-red-600/20 shine' : ''
+        className={`mt-2 rounded-xl border border-black/10 dark:border-white/10 ${
+          isHappeningNow ? 'bg-red-600/20 shine' : 'bg-theme-200'
         }`}
       >
         <div className="p-3">
