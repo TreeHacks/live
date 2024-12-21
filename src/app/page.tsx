@@ -131,7 +131,7 @@ export default function Home() {
           <h1 className="text-3xl font-semibold">TreeHacks Schedule</h1>
           <Schedule />
         </div>
-        <div className="col-span-1">
+        <div className="col-span-1 mb-80">
           <h1 className="text-3xl font-semibold">Welcome!</h1>
           <p className="mt-2">
             This is your home for all things TreeHacks 2025. Click the bell icon
