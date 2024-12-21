@@ -71,6 +71,7 @@ function ScheduleItem({
   }).format(endDate);
   const isHappeningNow =
     Date.now() >= Date.parse(startTime) && Date.now() <= Date.parse(endTime);
+  const isPrevious = Date.now() > Date.parse(endTime);
 
   return (
     <div className="relative">
@@ -89,7 +90,7 @@ function ScheduleItem({
         </span>{' '}
         — {startClock} to {endClock}
         <div className="text-sm absolute right-0 top-0 flex gap-2">
-          {!isHappeningNow ? (
+          {!(isHappeningNow || isPrevious) ? (
             !pushSupported ? (
               <CircleButton icon={faBell} onClick={() => setKey(false)}>
                 Install App
