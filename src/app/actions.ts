@@ -5,7 +5,7 @@ import webpush, { PushSubscription } from 'web-push';
 webpush.setVapidDetails(
   'mailto:hello@treehacks.com',
   process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-  process.env.VAPID_PRIVATE_KEY!
+  process.env.VAPID_PRIVATE_KEY!,
 );
 
 let subscription: PushSubscription | null = null;
@@ -37,7 +37,7 @@ export async function sendNotification(message: string) {
         title: 'Test Notification',
         body: message,
         icon: '/icon.png',
-      })
+      }),
     );
     return { success: true };
   } catch (error) {

@@ -14,16 +14,16 @@ import { useContext } from 'react';
 export default function PWAOnboarding() {
   const { isLoading, isIOS, isStandalone, isMobile } = useContext(PWAContext);
   const [isPopupDismissed, setDismissed] = useStorage(
-    StoreData.PWAPopoutDismissed
+    StoreData.PWAPopoutDismissed,
   );
   const showPWAOnboarding =
     !isLoading && !isPopupDismissed && !isStandalone && isMobile;
 
   return showPWAOnboarding ? (
-    <div className="inset-0 fixed z-10 backdrop-blur-sm">
-      <div className="m-2 py-8 px-6 rounded-lg bg-theme-300 border-theme-400 border">
+    <div className="fixed inset-0 z-10 backdrop-blur-sm">
+      <div className="m-2 rounded-lg border border-theme-400 bg-theme-300 px-6 py-8">
         <div className="text-center">
-          <h1 className="font-semibold text-3xl">Welcome to TreeHacks!</h1>
+          <h1 className="text-3xl font-semibold">Welcome to TreeHacks!</h1>
           <div className="mt-6">
             <p className="">
               Please install the TreeHacks app so we can notify you about events
@@ -35,7 +35,7 @@ export default function PWAOnboarding() {
           {isIOS ? (
             <div className="mt-6 flex flex-col gap-2">
               <div className="flex items-center gap-4">
-                <div className="flex items-center justify-center rounded-md border-theme-400 border-2 h-12 w-12">
+                <div className="flex h-12 w-12 items-center justify-center rounded-md border-2 border-theme-400">
                   <FontAwesomeIcon
                     icon={faArrowUpFromBracket}
                     className="flex-grow"
@@ -45,7 +45,7 @@ export default function PWAOnboarding() {
                 <div className="font-medium">Tap the share icon below.</div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="flex items-center justify-center rounded-md border-theme-400 border-2 h-12 w-12">
+                <div className="flex h-12 w-12 items-center justify-center rounded-md border-2 border-theme-400">
                   <FontAwesomeIcon
                     icon={faPlus}
                     className="flex-grow"
@@ -60,7 +60,7 @@ export default function PWAOnboarding() {
           ) : (
             <div className="mt-6 flex flex-col gap-2">
               <div className="flex items-center gap-4">
-                <div className="flex items-center justify-center rounded-md border-theme-400 border-2 h-12 w-12">
+                <div className="flex h-12 w-12 items-center justify-center rounded-md border-2 border-theme-400">
                   <FontAwesomeIcon
                     icon={faChrome}
                     className="flex-grow"
@@ -72,7 +72,7 @@ export default function PWAOnboarding() {
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="flex items-center justify-center rounded-md border-theme-400 border-2 h-12 w-12">
+                <div className="flex h-12 w-12 items-center justify-center rounded-md border-2 border-theme-400">
                   <FontAwesomeIcon
                     icon={faEllipsisVertical}
                     className="flex-grow"
@@ -82,7 +82,7 @@ export default function PWAOnboarding() {
                 <div className="font-medium">Tap the three-dot icon</div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="flex items-center justify-center rounded-md border-theme-400 border-2 h-12 w-12">
+                <div className="flex h-12 w-12 items-center justify-center rounded-md border-2 border-theme-400">
                   <FontAwesomeIcon
                     icon={faPlus}
                     className="flex-grow"
@@ -96,7 +96,7 @@ export default function PWAOnboarding() {
             </div>
           )}
         </div>
-        <div className="flex items-center justify-center mt-4">
+        <div className="mt-4 flex items-center justify-center">
           <button
             className="underline opacity-80"
             onClick={() => setDismissed(true)}

@@ -31,7 +31,7 @@ export default function PushProvider({
 }) {
   const [pushSupported, setIsSupported] = useState(false);
   const [subscription, setSubscription] = useState<PushSubscription | null>(
-    null
+    null,
   );
   const [subscribedEvents, setSubscribedEvents] = useState<string[]>([]);
   const [loadingSubscriptions, setLoadingSubscriptions] = useState(true);
@@ -71,7 +71,7 @@ export default function PushProvider({
     const sub = await registration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: urlBase64ToUint8Array(
-        process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
+        process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
       ),
     });
     setSubscription(sub);

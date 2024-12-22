@@ -23,7 +23,7 @@ interface NavItemProps {
 function NavItem({ children, href }: NavItemProps) {
   return (
     <Link
-      className="px-2 transition text-md text-foreground opacity-60 hover:opacity-100 font-medium flex flex-col items-center justify-center gap-0.5"
+      className="text-md flex flex-col items-center justify-center gap-0.5 px-2 font-medium text-foreground opacity-60 transition hover:opacity-100"
       href={href}
       target={href.startsWith('http') ? '_blank' : undefined}
     >
@@ -37,7 +37,7 @@ function MobileNavItem({ children, href }: NavItemProps) {
 
   return (
     <Link
-      className={`transition text-2xl text-foreground flex flex-col items-center justify-center gap-1 ${
+      className={`flex flex-col items-center justify-center gap-1 text-2xl text-foreground transition ${
         isCurr ? 'opacity-100' : 'opacity-60'
       }`}
       href={href}
@@ -51,15 +51,15 @@ function MobileNavItem({ children, href }: NavItemProps) {
 export default function Navbar() {
   return (
     <div>
-      <div className="w-full flex items-center justify-center my-4 text-brand-400 fixed top-0 z-10">
-        <div className="sm:w-[90%] max-w-5xl backdrop-blur-lg py-2 px-4 mx-auto rounded-full border border-black/10 dark:border-white/10 bg-white/80 dark:bg-transparent">
-          <div className="flex gap-2 items-center justify-center sm:justify-normal">
+      <div className="fixed top-0 z-10 my-4 flex w-full items-center justify-center text-brand-400">
+        <div className="mx-auto max-w-5xl rounded-full border border-black/10 bg-white/80 px-4 py-2 backdrop-blur-lg sm:w-[90%] dark:border-white/10 dark:bg-transparent">
+          <div className="flex items-center justify-center gap-2 sm:justify-normal">
             <Image
               src={wordmarkSvg}
               alt="TreeHacks Live logo"
-              className="h-8 w-auto hidden sm:flex"
+              className="hidden h-8 w-auto sm:flex"
             />
-            <div className="hidden sm:flex ml-auto">
+            <div className="ml-auto hidden sm:flex">
               <NavItem href="/">Schedule</NavItem>
               <NavItem href="/packs">Devpost</NavItem>
               <NavItem href="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit">
@@ -70,8 +70,8 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      <div className="sm:hidden flex items-center justify-center fixed w-full z-10 pt-4">
-        <div className="backdrop-blur-md rounded-full px-4 py-1 border border-black/10 dark:border-white/10 bg-white/80 dark:bg-transparent">
+      <div className="fixed z-10 flex w-full items-center justify-center pt-4 sm:hidden">
+        <div className="rounded-full border border-black/10 bg-white/80 px-4 py-1 backdrop-blur-md dark:border-white/10 dark:bg-transparent">
           <Image
             src={wordmarkSvg}
             alt="TreeHacks Live logo"
@@ -79,7 +79,7 @@ export default function Navbar() {
           />
         </div>
       </div>
-      <div className="fixed bottom-0 w-full bg-theme-100 grid grid-cols-4 justify-center pb-8 pt-4 z-10 px-4 sm:hidden border-t border-black/10 dark:border-white/10">
+      <div className="fixed bottom-0 z-10 grid w-full grid-cols-4 justify-center border-t border-black/10 bg-theme-100 px-4 pb-8 pt-4 sm:hidden dark:border-white/10">
         <MobileNavItem href="/">
           <FontAwesomeIcon icon={faCalendarAlt} />
           <div className="text-xs">Schedule</div>

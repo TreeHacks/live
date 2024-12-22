@@ -21,7 +21,7 @@ function urlBase64ToUint8Array(base64String: string) {
 function PushNotificationManager() {
   const [isSupported, setIsSupported] = useState(false);
   const [subscription, setSubscription] = useState<PushSubscription | null>(
-    null
+    null,
   );
   const [message, setMessage] = useState('');
 
@@ -46,7 +46,7 @@ function PushNotificationManager() {
     const sub = await registration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: urlBase64ToUint8Array(
-        process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
+        process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
       ),
     });
     setSubscription(sub);
@@ -102,7 +102,7 @@ function InstallPrompt() {
   useEffect(() => {
     setIsIOS(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream,
     );
 
     setIsStandalone(window.matchMedia('(display-mode: standalone)').matches);

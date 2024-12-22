@@ -22,7 +22,7 @@ export default function CircleButton({
     <button
       className={`${
         children != null ? 'px-2' : 'w-7'
-      } h-7 rounded-full border bg-theme-200 border-black/10 dark:border-white/10 flex flex-row items-center justify-center gap-1`}
+      } flex h-7 flex-row items-center justify-center gap-1 rounded-full border border-black/10 bg-theme-200 dark:border-white/10`}
       onClick={onClick}
     >
       <FontAwesomeIcon icon={icon} className={iconClassName} />

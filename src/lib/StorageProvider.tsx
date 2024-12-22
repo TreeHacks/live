@@ -54,7 +54,7 @@ export default function StorageProvider({
     for (const key of Object.keys(StoreData)) {
       const valueString = localStorage.getItem(key);
       const { value }: LocalStorageStore = JSON.parse(
-        valueString ?? 'null'
+        valueString ?? 'null',
       ) ?? { value: defaultStorage[key as StoreData] };
 
       store[key as StoreData] = value;

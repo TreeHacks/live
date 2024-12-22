@@ -80,20 +80,20 @@ function ScheduleItem({
   return (
     <div className="relative">
       <div
-        className={`w-2 h-2 rounded-full absolute -left-5 top-2.5 ${
+        className={`absolute -left-5 top-2.5 h-2 w-2 rounded-full ${
           isHappeningNow ? 'bg-red-600' : 'bg-black dark:bg-white'
         }`}
       />
       <div className="text-lg">
         <span
           className={`font-semibold ${
-            isHappeningNow ? 'text-red-600 animate-pulse' : ''
+            isHappeningNow ? 'animate-pulse text-red-600' : ''
           }`}
         >
           {isHappeningNow ? 'Happening Now' : dayOfWeek}
         </span>{' '}
         — {startClock} to {endClock}
-        <div className="text-sm absolute right-0 top-0 flex gap-2">
+        <div className="absolute right-0 top-0 flex gap-2 text-sm">
           {!(isHappeningNow || isPrevious) ? (
             !pushSupported ? (
               <CircleButton icon={faBell} onClick={() => setKey(false)}>
@@ -117,11 +117,11 @@ function ScheduleItem({
       </div>
       <div
         className={`mt-2 rounded-xl border border-black/10 dark:border-white/10 ${
-          isHappeningNow ? 'bg-red-600/20 shine' : 'bg-theme-200'
+          isHappeningNow ? 'shine bg-red-600/20' : 'bg-theme-200'
         }`}
       >
         <div className="p-3">
-          <div className="font-semibold text-lg">{title}</div>
+          <div className="text-lg font-semibold">{title}</div>
           <div className="mt-1 text-black/90 dark:text-white/90">
             {description}
           </div>
@@ -155,15 +155,15 @@ export default React.memo(function Schedule() {
   const upcomingEvents = React.useMemo(
     () =>
       schedule.filter((event) => Date.parse(event.end_time) >= throttledNow),
-    [schedule, throttledNow]
+    [schedule, throttledNow],
   );
   const pastEvents = React.useMemo(
     () => schedule.filter((event) => Date.parse(event.end_time) < throttledNow),
-    [schedule, throttledNow]
+    [schedule, throttledNow],
   );
   const subscribedEvents = React.useMemo(
     () => schedule.filter((event) => subscribedEventIds.includes(event.id)),
-    [schedule, subscribedEventIds]
+    [schedule, subscribedEventIds],
   );
   const searchedEvents = React.useMemo(
     () =>
@@ -171,9 +171,9 @@ export default React.memo(function Schedule() {
         (event) =>
           event.title.toLowerCase().includes(filterText.toLowerCase()) ||
           event.description.toLowerCase().includes(filterText.toLowerCase()) ||
-          event.location.toLowerCase().includes(filterText.toLowerCase())
+          event.location.toLowerCase().includes(filterText.toLowerCase()),
       ),
-    [schedule, filterText]
+    [schedule, filterText],
   );
 
   const events = React.useMemo(
@@ -181,10 +181,10 @@ export default React.memo(function Schedule() {
       (filterText != ''
         ? searchedEvents
         : scheduleFilter === 'upcoming'
-        ? upcomingEvents
-        : scheduleFilter === 'subscribed'
-        ? subscribedEvents
-        : pastEvents
+          ? upcomingEvents
+          : scheduleFilter === 'subscribed'
+            ? subscribedEvents
+            : pastEvents
       ).map((event) => (
         <ScheduleItem
           key={event.id}
@@ -203,19 +203,19 @@ export default React.memo(function Schedule() {
       subscribedEvents,
       filterText,
       searchedEvents,
-    ]
+    ],
   );
 
   return (
     <div>
-      <div className="flex sm:flex-row flex-col gap-4 mt-4">
-        <div className="h-full flex items-center justify-center rounded-full border border-black/10 dark:border-white/10 relative flex-grow">
+      <div className="mt-4 flex flex-col gap-4 sm:flex-row">
+        <div className="relative flex h-full flex-grow items-center justify-center rounded-full border border-black/10 dark:border-white/10">
           <FontAwesomeIcon
             icon={faSearch}
-            className="absolute left-0 pl-4 -z-10"
+            className="absolute left-0 -z-10 pl-4"
           />
           <input
-            className="pl-10 bg-transparent rounded-full p-2 pr-2 w-full"
+            className="w-full rounded-full bg-transparent p-2 pl-10 pr-2"
             placeholder="Search"
             value={filterText}
             onChange={(event) => setFilterText(event.target.value)}
@@ -238,15 +238,15 @@ export default React.memo(function Schedule() {
           />
         </motion.div>
       </div>
-      <div className="flex flex-col gap-4 mt-4 p-4 border-l border-black/20 dark:border-white/20">
+      <div className="mt-4 flex flex-col gap-4 border-l border-black/20 p-4 dark:border-white/20">
         {events}
         {isLoading ? (
-          <div className="flex justify-center items-center text-black/60 dark:text-white/60">
+          <div className="flex items-center justify-center text-black/60 dark:text-white/60">
             <FontAwesomeIcon icon={faCircleNotch} className="animate-spin" />
             <span className="ml-2">Loading events...</span>
           </div>
         ) : events.length === 0 ? (
-          <div className="text-black/60 dark:text-white/60 text-center">
+          <div className="text-center text-black/60 dark:text-white/60">
             No {scheduleFilter} events to show.
           </div>
         ) : null}

@@ -7,7 +7,7 @@ interface SubscriptionAPIResponse {
 
 export function createEventSubscription(
   subscription: PushSubscription,
-  eventId: string
+  eventId: string,
 ): Promise<SubscriptionAPIResponse> {
   return fetch(SUBSCRIPTION_API_URL, {
     method: 'POST',
@@ -23,7 +23,7 @@ export function createEventSubscription(
 
 export function removeEventSubscription(
   subscription: PushSubscription,
-  eventId: string
+  eventId: string,
 ): Promise<SubscriptionAPIResponse> {
   return fetch(SUBSCRIPTION_API_URL, {
     method: 'DELETE',
@@ -38,7 +38,7 @@ export function removeEventSubscription(
 }
 
 export function getEventSubscriptions(
-  subscription: PushSubscription
+  subscription: PushSubscription,
 ): Promise<string[]> {
   return fetch(
     SUBSCRIPTION_API_URL +
@@ -48,6 +48,6 @@ export function getEventSubscriptions(
       }),
     {
       method: 'GET',
-    }
+    },
   ).then((res) => res.json());
 }

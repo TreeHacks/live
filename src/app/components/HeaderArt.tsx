@@ -7,7 +7,7 @@ export default function HeaderArt() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="xMidYMin slice"
-      className="w-full h-full absolute -z-10"
+      className="absolute -z-10 h-full w-full"
     >
       <g clipPath="url(#clip0_226_309)">
         <mask
