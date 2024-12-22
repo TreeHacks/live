@@ -8,7 +8,6 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCalendarAlt,
-  faCode,
   faHammer,
   faInfoCircle,
   faTrophy,
@@ -51,21 +50,21 @@ function MobileNavItem({ children, href }: NavItemProps) {
 export default function Navbar() {
   return (
     <div>
-      <div className="fixed top-0 z-10 my-4 flex w-full items-center justify-center text-brand-400">
+      <div className="fixed top-0 z-10 my-4 hidden w-full items-center justify-center text-brand-400 sm:flex">
         <div className="mx-auto max-w-5xl rounded-full border border-black/10 bg-white/80 px-4 py-2 backdrop-blur-lg sm:w-[90%] dark:border-white/10 dark:bg-transparent">
           <div className="flex items-center justify-center gap-2 sm:justify-normal">
             <Image
               src={wordmarkSvg}
               alt="TreeHacks Live logo"
-              className="hidden h-8 w-auto sm:flex"
+              className="h-8 w-auto"
             />
-            <div className="ml-auto hidden sm:flex">
+            <div className="ml-auto flex">
               <NavItem href="/">Schedule</NavItem>
               <NavItem href="/packs">Devpost</NavItem>
               <NavItem href="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit">
                 FAQs
               </NavItem>
-              <NavItem href="/packs">Resources</NavItem>
+              <NavItem href="/resources">Resources</NavItem>
             </div>
           </div>
         </div>
@@ -84,13 +83,13 @@ export default function Navbar() {
           <FontAwesomeIcon icon={faCalendarAlt} />
           <div className="text-xs">Schedule</div>
         </MobileNavItem>
-        <MobileNavItem href="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit">
-          <FontAwesomeIcon icon={faInfoCircle} />
-          <div className="text-xs">FAQs</div>
-        </MobileNavItem>
         <MobileNavItem href="/resources">
           <FontAwesomeIcon icon={faHammer} />
           <div className="text-xs">Resources</div>
+        </MobileNavItem>
+        <MobileNavItem href="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit">
+          <FontAwesomeIcon icon={faInfoCircle} />
+          <div className="text-xs">FAQs</div>
         </MobileNavItem>
         <MobileNavItem href="/prizes">
           <FontAwesomeIcon icon={faTrophy} />

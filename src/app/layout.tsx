@@ -38,7 +38,7 @@ export default function RootLayout({
           <ScheduleProvider>
             <html lang="en">
               <body
-                className={`${fredokaSans.className} ${monoFont.variable} antialiased`}
+                className={`${fredokaSans.className} ${monoFont.variable} relative antialiased`}
               >
                 <Navbar />
                 <PWAOnboarding />
