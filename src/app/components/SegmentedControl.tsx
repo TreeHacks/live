@@ -41,7 +41,7 @@ export default function SegmentedControl({
   }, [optionRefs, selected]);
 
   return (
-    <div className="flex mt-4">
+    <div className="flex-shrink">
       <div className="rounded-full p-1 border border-black/10 dark:border-white/10 gap-1 flex relative">
         {options.map((option) => (
           <button

@@ -7,11 +7,13 @@ import {
   faCircleNotch,
   faExternalLink,
   faLocationDot,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ScheduleContext } from '@/lib/ScheduleProvider';
 import { PushContext } from '@/lib/PushProvider';
 import { StoreData, useStorage } from '@/lib/StorageProvider';
+import { motion } from 'framer-motion';
 
 interface ScheduleItemProps {
   id: string;
@@ -134,6 +136,7 @@ export default React.memo(function Schedule() {
   const { schedule } = useContext(ScheduleContext);
   const { subscribedEvents: subscribedEventIds } = useContext(PushContext);
 
+  const [filterText, setFilterText] = useState('');
   const [scheduleFilter, setScheduleFilter] = useState('upcoming');
 
   const [throttledNow, setNow] = useState(() => Date.now());
@@ -160,10 +163,22 @@ export default React.memo(function Schedule() {
     () => schedule.filter((event) => subscribedEventIds.includes(event.id)),
     [schedule, subscribedEventIds]
   );
+  const searchedEvents = React.useMemo(
+    () =>
+      schedule.filter(
+        (event) =>
+          event.title.toLowerCase().includes(filterText.toLowerCase()) ||
+          event.description.toLowerCase().includes(filterText.toLowerCase()) ||
+          event.location.toLowerCase().includes(filterText.toLowerCase())
+      ),
+    [schedule, filterText]
+  );
 
   const events = React.useMemo(
     () =>
-      (scheduleFilter === 'upcoming'
+      (filterText != ''
+        ? searchedEvents
+        : scheduleFilter === 'upcoming'
         ? upcomingEvents
         : scheduleFilter === 'subscribed'
         ? subscribedEvents
@@ -179,19 +194,48 @@ export default React.memo(function Schedule() {
           location={event.location}
         />
       )),
-    [scheduleFilter, upcomingEvents, pastEvents, subscribedEvents]
+    [
+      scheduleFilter,
+      upcomingEvents,
+      pastEvents,
+      subscribedEvents,
+      filterText,
+      searchedEvents,
+    ]
   );
 
   return (
     <div>
-      <SegmentedControl
-        options={[
-          { id: 'upcoming', label: 'Upcoming' },
-          { id: 'past', label: 'Previous' },
-          { id: 'subscribed', label: 'Subscribed' },
-        ]}
-        onSelect={setScheduleFilter}
-      />
+      <div className="flex sm:flex-row flex-col gap-2 mt-4">
+        <div className="h-full flex items-center justify-center rounded-full border border-black/10 dark:border-white/10 relative flex-grow">
+          <FontAwesomeIcon
+            icon={faSearch}
+            className="absolute left-0 pl-4 -z-10"
+          />
+          <input
+            className="pl-10 bg-transparent rounded-full p-2 pr-2 w-full"
+            placeholder="Search"
+            value={filterText}
+            onChange={(event) => setFilterText(event.target.value)}
+          />
+        </div>
+        <motion.div
+          className="flex overflow-hidden"
+          animate={{
+            width: filterText === '' ? 'auto' : 0,
+            height: filterText === '' ? 'auto' : 0,
+          }}
+        >
+          <SegmentedControl
+            options={[
+              { id: 'upcoming', label: 'Upcoming' },
+              { id: 'past', label: 'Previous' },
+              { id: 'subscribed', label: 'Subscribed' },
+            ]}
+            onSelect={setScheduleFilter}
+          />
+        </motion.div>
+      </div>
       <div className="flex flex-col gap-4 mt-4 p-4 border-l border-black/20 dark:border-white/20">
         {events}
         {events.length === 0 ? (
