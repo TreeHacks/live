@@ -1,23 +1,11 @@
-'use client';
-
-import { faChrome } from '@fortawesome/free-brands-svg-icons';
-import {
-  faArrowUpFromBracket,
-  faEllipsisVertical,
-  faPlus,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { PWAContext } from '../lib/PWAProvider';
-import { useContext } from 'react';
 import Countdown from './components/Countdown';
 import Schedule from './components/Schedule';
-import { StoreData, useStorage } from '@/lib/StorageProvider';
 import HeaderArt from './components/HeaderArt';
 
 export default function Home() {
   return (
     <div>
-      <div className="h-[35vh] md:h-[45vh] relative">
+      <div className="h-[25vh] md:h-[45vh] relative">
         <HeaderArt />
         <div className="w-screen h-full flex items-center justify-center text-white dark:bg-black/50">
           <div className="text-center mt-12">
