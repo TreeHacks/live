@@ -133,7 +133,7 @@ function ScheduleItem({
 }
 
 export default React.memo(function Schedule() {
-  const { schedule } = useContext(ScheduleContext);
+  const { schedule, isLoading } = useContext(ScheduleContext);
   const { subscribedEvents: subscribedEventIds } = useContext(PushContext);
 
   const [filterText, setFilterText] = useState('');
@@ -238,7 +238,12 @@ export default React.memo(function Schedule() {
       </div>
       <div className="flex flex-col gap-4 mt-4 p-4 border-l border-black/20 dark:border-white/20">
         {events}
-        {events.length === 0 ? (
+        {isLoading ? (
+          <div className="flex justify-center items-center text-black/60 dark:text-white/60">
+            <FontAwesomeIcon icon={faCircleNotch} className="animate-spin" />
+            <span className="ml-2">Loading events...</span>
+          </div>
+        ) : events.length === 0 ? (
           <div className="text-black/60 dark:text-white/60 text-center">
             No {scheduleFilter} events to show.
           </div>

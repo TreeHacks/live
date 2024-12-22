@@ -9,6 +9,7 @@ import PWAProvider from '../lib/PWAProvider';
 import ScheduleProvider from '@/lib/ScheduleProvider';
 import StorageProvider from '@/lib/StorageProvider';
 import PushProvider from '@/lib/PushProvider';
+import PWAOnboarding from './components/PWAOnboarding';
 config.autoAddCss = false;
 
 const fredokaSans = Fredoka({
@@ -40,6 +41,7 @@ export default function RootLayout({
                 className={`${fredokaSans.className} ${monoFont.variable} antialiased`}
               >
                 <Navbar />
+                <PWAOnboarding />
                 {children}
                 <footer>
                   <div className="flex items-center justify-center py-8 text-center text-md">

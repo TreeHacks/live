@@ -43,12 +43,18 @@ export default function ScheduleProvider({
       setSchedule(data);
       setIsLoading(false);
     } else {
-      setFetchFailed(true);
+      if (schedule.length === 0) {
+        setFetchFailed(true);
+      }
     }
   }
 
   useEffect(() => {
     fetchData();
+
+    // Update the events list every minute
+    const interval = setInterval(fetchData, 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
