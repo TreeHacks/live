@@ -42,11 +42,11 @@ export default function SegmentedControl({
 
   return (
     <div className="flex-shrink">
-      <div className="rounded-full p-1 border border-black/10 dark:border-white/10 gap-1 flex relative">
+      <div className="rounded-full p-1 border border-black/10 dark:border-white/10 gap-1 flex">
         {options.map((option) => (
           <button
             key={option.id}
-            className="px-3 py-1 rounded-full"
+            className="px-3 py-1 rounded-full relative"
             ref={(el: HTMLButtonElement) => {
               optionRefs.current[option.id] = el;
             }}
@@ -56,19 +56,15 @@ export default function SegmentedControl({
             }}
           >
             {option.label}
+            {selected === option.id && (
+              <motion.div
+                className="rounded-full absolute bg-theme-300 w-full h-full left-0 top-0 -z-10"
+                transition={{ type: 'spring', duration: 0.3, bounce: 0.2 }}
+                layoutId="selector"
+              />
+            )}
           </button>
         ))}
-
-        <motion.div
-          className="rounded-full absolute bg-theme-300 -z-10 left-0"
-          transition={{ type: 'spring', duration: 0.3, bounce: 0.2 }}
-          animate={{
-            width: selectorWidth,
-            height: selectorHeight,
-            x: selectorX,
-          }}
-          initial={false}
-        />
       </div>
     </div>
   );
