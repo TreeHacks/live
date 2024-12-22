@@ -25,6 +25,7 @@ function NavItem({ children, href }: NavItemProps) {
     <Link
       className="px-2 transition text-md text-foreground opacity-60 hover:opacity-100 font-medium flex flex-col items-center justify-center gap-0.5"
       href={href}
+      target={href.startsWith('http') ? '_blank' : undefined}
     >
       {children}
     </Link>
@@ -40,6 +41,7 @@ function MobileNavItem({ children, href }: NavItemProps) {
         isCurr ? 'opacity-100' : 'opacity-60'
       }`}
       href={href}
+      target={href.startsWith('http') ? '_blank' : undefined}
     >
       {children}
     </Link>
@@ -60,7 +62,9 @@ export default function Navbar() {
             <div className="hidden sm:flex ml-auto">
               <NavItem href="/">Schedule</NavItem>
               <NavItem href="/packs">Devpost</NavItem>
-              <NavItem href="/packs">FAQs</NavItem>
+              <NavItem href="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit">
+                FAQs
+              </NavItem>
               <NavItem href="/packs">Resources</NavItem>
             </div>
           </div>
@@ -80,7 +84,7 @@ export default function Navbar() {
           <FontAwesomeIcon icon={faCalendarAlt} />
           <div className="text-xs">Schedule</div>
         </MobileNavItem>
-        <MobileNavItem href="/faq">
+        <MobileNavItem href="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit">
           <FontAwesomeIcon icon={faInfoCircle} />
           <div className="text-xs">FAQs</div>
         </MobileNavItem>
