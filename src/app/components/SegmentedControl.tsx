@@ -18,28 +18,6 @@ export default function SegmentedControl({
   const [selected, setSelected] = useState<string>(options[0].id);
   const optionRefs = useRef<Record<string, HTMLButtonElement>>({});
 
-  const [selectorWidth, setSelectorWidth] = useState(0);
-  const [selectorHeight, setSelectorHeight] = useState(0);
-  const [selectorX, setSelectorX] = useState(0);
-
-  useEffect(() => {
-    if (optionRefs.current) {
-      const elem = optionRefs.current[selected];
-
-      if (!elem) {
-        return;
-      }
-
-      const childRect = elem.getBoundingClientRect();
-      const parentRect = elem.parentElement!.getBoundingClientRect();
-
-      setSelectorWidth(childRect.width);
-      setSelectorHeight(childRect.height);
-
-      setSelectorX(childRect.left - parentRect.left);
-    }
-  }, [optionRefs, selected]);
-
   return (
     <div className="flex-shrink">
       <div className="rounded-full p-1 border border-black/10 dark:border-white/10 gap-1 flex">
