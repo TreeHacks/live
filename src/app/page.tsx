@@ -1,6 +1,13 @@
 import Countdown from './components/Countdown';
 import Schedule from './components/Schedule';
 import HeaderArt from './components/HeaderArt';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBook,
+  faCode,
+  faQuestion,
+  faTrophy,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
   return (
@@ -28,10 +35,26 @@ export default function Home() {
           <p className="mt-2">
             This is your home for all things TreeHacks 2025. Click the bell icon
             next to some events on the left to be notified when they happen!
-            Install the web app on your phone for the best experience. Below,
-            you&apos;ll find a curated list of resources to get you started on a
-            project.
+            Install the web app on your phone for the best experience.
           </p>
+          <div className="grid grid-cols-3 gap-4 mt-4">
+            <div className="border border-black/10 dark:border-white/10 aspect-square flex flex-col items-center justify-center rounded-xl text-sm">
+              <FontAwesomeIcon icon={faCode} size="xl" />
+              <div>Devpost</div>
+            </div>
+            <div className="border border-black/10 dark:border-white/10 aspect-square flex flex-col items-center justify-center rounded-xl text-sm">
+              <FontAwesomeIcon icon={faTrophy} size="xl" />
+              <div>Prizes</div>
+            </div>
+            <div className="border border-black/10 dark:border-white/10 aspect-square flex flex-col items-center justify-center rounded-xl text-sm">
+              <FontAwesomeIcon icon={faQuestion} size="xl" />
+              <div>FAQs</div>
+            </div>
+            <div className="border border-black/10 dark:border-white/10 aspect-square flex flex-col items-center justify-center rounded-xl text-sm">
+              <FontAwesomeIcon icon={faBook} size="xl" />
+              <div>Resources</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

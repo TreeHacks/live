@@ -208,7 +208,7 @@ export default React.memo(function Schedule() {
 
   return (
     <div>
-      <div className="flex sm:flex-row flex-col gap-2 mt-4">
+      <div className="flex sm:flex-row flex-col gap-4 mt-4">
         <div className="h-full flex items-center justify-center rounded-full border border-black/10 dark:border-white/10 relative flex-grow">
           <FontAwesomeIcon
             icon={faSearch}
