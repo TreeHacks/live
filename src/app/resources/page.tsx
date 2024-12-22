@@ -1,12 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBook,
-  faCode,
-  faQuestion,
-  faTrophy,
-} from '@fortawesome/free-solid-svg-icons';
 import HeaderArt from '../components/HeaderArt';
-import Countdown from '../components/Countdown';
 import Link from 'next/link';
 
 const HACK_PACKS = [
@@ -69,7 +61,7 @@ function HackPack({ title, url }: { title: string; url: string }) {
     <Link
       href={url}
       target="_blank"
-      className="transform rounded-lg border border-black/10 bg-theme-200 p-2 transition hover:scale-105 dark:border-white/10"
+      className="transform rounded-lg border border-black/10 bg-theme-200 p-2 transition sm:hover:scale-105 dark:border-white/10"
     >
       {title}
     </Link>
@@ -101,7 +93,7 @@ export default function Home() {
             Quickly start your project with one of our pre-made hack pack
             templates.
           </p>
-          <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="mt-4 grid grid-cols-2 gap-4">
             {HACK_PACKS.map((hackPack) => (
               <HackPack key={hackPack.title} {...hackPack} />
             ))}

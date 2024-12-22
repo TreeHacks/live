@@ -34,28 +34,26 @@ export default function ScheduleProvider({
   const [isLoading, setIsLoading] = useState(true);
   const [fetchFailed, setFetchFailed] = useState(false);
 
-  async function fetchData() {
-    const data = await fetch(process.env.NEXT_PUBLIC_SCHEDULE_API_URL!)
-      .then((res) => res.json())
-      .catch(() => null);
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetch(process.env.NEXT_PUBLIC_SCHEDULE_API_URL!)
+        .then((res) => res.json())
+        .catch(() => null);
 
-    if (data != null) {
-      setSchedule(data);
-      setIsLoading(false);
-    } else {
-      if (schedule.length === 0) {
+      if (data != null) {
+        setSchedule(data);
+        setIsLoading(false);
+      } else {
         setFetchFailed(true);
       }
     }
-  }
 
-  useEffect(() => {
     fetchData();
 
     // Update the events list every minute
     const interval = setInterval(fetchData, 60 * 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [schedule.length]);
 
   return (
     <ScheduleContext.Provider value={{ schedule, isLoading, fetchFailed }}>

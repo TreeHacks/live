@@ -22,7 +22,7 @@ const defaultStorage: StoreTypes = {
 };
 
 interface LocalStorageStore {
-  value: any;
+  value: boolean;
 }
 
 export const StorageContext = createContext<{
@@ -30,10 +30,12 @@ export const StorageContext = createContext<{
   setStorage: Dispatch<SetStateAction<StoreTypes>>;
 }>({ storage: defaultStorage, setStorage: () => null });
 
-export function useStorage(key: StoreData): [any, (value: any) => void] {
+export function useStorage(
+  key: StoreData,
+): [boolean, (value: boolean) => void] {
   const { storage, setStorage } = useContext(StorageContext);
 
-  function setKey(value: any) {
+  function setKey(value: boolean) {
     const toStore: LocalStorageStore = { value };
     setStorage((prev) => ({ ...prev, [key]: value }));
     localStorage.setItem(key, JSON.stringify(toStore));
@@ -50,7 +52,7 @@ export default function StorageProvider({
   const [storage, setStorage] = useState<StoreTypes>(defaultStorage);
 
   function fetchStorage() {
-    let store = {} as Partial<StoreTypes>;
+    const store = {} as Partial<StoreTypes>;
     for (const key of Object.keys(StoreData)) {
       const valueString = localStorage.getItem(key);
       const { value }: LocalStorageStore = JSON.parse(

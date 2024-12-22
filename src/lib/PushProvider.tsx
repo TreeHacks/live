@@ -59,7 +59,8 @@ export default function PushProvider({
       }
 
       setLoadingSubscriptions(false);
-    } catch (_) {
+    } catch (err) {
+      console.error(err);
       alert('Please allow notifications to subscribe to events.');
       setLoadingSubscriptions(false);
     }
