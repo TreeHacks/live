@@ -76,21 +76,23 @@ export default function PushProvider({
       ),
     });
     setSubscription(sub);
+    return sub;
   }
 
   // Subscribe to a specific event
   async function subscribeToEvent(eventId: string) {
-    if (subscription == null) {
-      await subscribeToPush();
+    let sub = subscription;
+    if (sub == null) {
+      sub = await subscribeToPush();
     }
 
-    if (subscription == null) {
+    if (sub == null) {
       alert('Please enable push notifications to subscribe to events.');
       return;
     }
 
     // Send the subscription to the server
-    const res = await createEventSubscription(subscription, eventId);
+    const res = await createEventSubscription(sub, eventId);
     if (res.error != null) {
       alert(res.error);
       return;
