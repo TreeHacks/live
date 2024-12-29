@@ -33,10 +33,31 @@ export default function ScheduleProvider({
   const [schedule, setSchedule] = useState<ScheduleItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [fetchFailed, setFetchFailed] = useState(false);
+  const [eventiveAPIKey, setEventiveAPIKey] = useState('');
+
+  useEffect(() => {
+    async function getAPIKey() {
+      const body = await fetch(
+        process.env.NEXT_PUBLIC_EVENTIVE_CONFIG_URL!,
+      ).then((res) => res.json());
+
+      if (body != null) {
+        setEventiveAPIKey(body.api_key);
+      }
+    }
+
+    if (eventiveAPIKey === '') {
+      getAPIKey();
+    }
+  }, [eventiveAPIKey]);
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetch(process.env.NEXT_PUBLIC_SCHEDULE_API_URL!)
+      const data = await fetch(
+        process.env.NEXT_PUBLIC_SCHEDULE_API_URL! +
+          '?api_key=' +
+          eventiveAPIKey,
+      )
         .then((res) => res.json())
         .catch(() => null);
 
@@ -48,12 +69,15 @@ export default function ScheduleProvider({
       }
     }
 
-    fetchData();
+    let interval: NodeJS.Timeout;
+    if (eventiveAPIKey !== '') {
+      fetchData();
+      interval = setInterval(fetchData, 60 * 1000);
+    }
 
     // Update the events list every minute
-    const interval = setInterval(fetchData, 60 * 1000);
     return () => clearInterval(interval);
-  }, [schedule.length]);
+  }, [schedule.length, eventiveAPIKey]);
 
   return (
     <ScheduleContext.Provider value={{ schedule, isLoading, fetchFailed }}>
