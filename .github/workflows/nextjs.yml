@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -69,6 +69,9 @@ jobs:
 
       - name: Build with Next.js
         run: pnpm build
+
+      - name: List files
+        run: ls -la
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
