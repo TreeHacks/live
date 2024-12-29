@@ -38,14 +38,11 @@ function Digit({ value, maxVal = 9 }: { value: number; maxVal?: number }) {
 
   return (
     <div className="relative">
-      <div className={isChanging ? 'opacity-0' : ''} suppressHydrationWarning>
-        {curr}
-      </div>
+      <div className={isChanging ? 'opacity-0' : ''}>{curr}</div>
       <motion.div
         className={`absolute top-0 ${isChanging ? '' : 'hidden'}`}
         animate={currAnimation}
         transition={transition}
-        suppressHydrationWarning
       >
         {curr}
       </motion.div>
@@ -53,7 +50,6 @@ function Digit({ value, maxVal = 9 }: { value: number; maxVal?: number }) {
         className={`absolute top-0 ${isChanging ? '' : 'hidden'}`}
         animate={nextAnimation}
         transition={transition}
-        suppressHydrationWarning
       >
         {nextVal}
       </motion.div>
@@ -64,9 +60,7 @@ function Digit({ value, maxVal = 9 }: { value: number; maxVal?: number }) {
 const START_TIME = 1739552400000;
 const END_TIME = 1739725200000;
 
-function getDuration() {
-  const now = Date.now();
-
+function getDuration(now: number) {
   let next = 0;
   if (now <= START_TIME) {
     next = START_TIME;
@@ -78,19 +72,20 @@ function getDuration() {
 }
 
 export default React.memo(function Countdown() {
-  const [duration, setDuration] = React.useState(() => getDuration());
+  const [throttledNow, setNow] = React.useState<number>();
 
   // Update the time every minute
   useEffect(() => {
+    setNow(Date.now());
+
     const timeout = setInterval(() => {
-      const nextDuration = getDuration();
-      setDuration(nextDuration);
+      setNow(Date.now());
     }, 1000);
 
     return () => clearTimeout(timeout);
-  });
+  }, []);
 
-  let runningDuration = duration;
+  let runningDuration = throttledNow != null ? getDuration(throttledNow) : 0;
 
   const dayFirstDigit = Math.floor(runningDuration / 864_000_000);
   runningDuration -= dayFirstDigit * 864_000_000;
@@ -112,18 +107,31 @@ export default React.memo(function Countdown() {
   const secondSecondDigit = Math.floor(runningDuration / 1_000);
 
   return (
-    <div className="flex flex-row">
-      <Digit value={dayFirstDigit} />
-      <Digit value={daySecondDigit} />
-      <div>:</div>
-      <Digit value={hourFirstDigit} maxVal={2} />
-      <Digit value={hourSecondDigit} />
-      <div>:</div>
-      <Digit value={minuteFirstDigit} maxVal={5} />
-      <Digit value={minuteSecondDigit} />
-      <div>:</div>
-      <Digit value={secondFirstDigit} maxVal={5} />
-      <Digit value={secondSecondDigit} />
-    </div>
+    <motion.div
+      className="flex flex-row"
+      animate={{
+        opacity: throttledNow == null ? 0 : 1,
+        y: throttledNow == null ? '-50%' : '0%',
+      }}
+      initial={false}
+    >
+      {throttledNow == null ? (
+        <>00:00:00:00</>
+      ) : (
+        <>
+          <Digit value={dayFirstDigit} />
+          <Digit value={daySecondDigit} />
+          <div>:</div>
+          <Digit value={hourFirstDigit} maxVal={2} />
+          <Digit value={hourSecondDigit} />
+          <div>:</div>
+          <Digit value={minuteFirstDigit} maxVal={5} />
+          <Digit value={minuteSecondDigit} />
+          <div>:</div>
+          <Digit value={secondFirstDigit} maxVal={5} />
+          <Digit value={secondSecondDigit} />
+        </>
+      )}
+    </motion.div>
   );
 });
