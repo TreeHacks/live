@@ -20,9 +20,11 @@ interface NavItemProps {
 }
 
 function NavItem({ children, href }: NavItemProps) {
+  const isCurr = usePathname() === href;
+
   return (
     <Link
-      className="text-md flex flex-col items-center justify-center gap-0.5 px-2 font-medium text-foreground opacity-60 transition hover:opacity-100"
+      className={`text-md flex flex-col items-center justify-center gap-0.5 px-2 font-medium text-foreground transition hover:opacity-100 ${isCurr ? 'opacity-100' : 'opacity-60'}`}
       href={href}
       target={href.startsWith('http') ? '_blank' : undefined}
     >
@@ -53,18 +55,18 @@ export default function Navbar() {
       <div className="fixed top-0 z-10 my-4 hidden w-full items-center justify-center text-brand-400 sm:flex">
         <div className="mx-auto max-w-5xl rounded-full border border-black/10 bg-white/80 px-4 py-2 backdrop-blur-lg sm:w-[90%] dark:border-white/10 dark:bg-transparent">
           <div className="flex items-center justify-center gap-2 sm:justify-normal">
-            <Image
-              src={wordmarkSvg}
-              alt="TreeHacks Live logo"
-              className="h-8 w-auto"
-            />
+            <Link href="/">
+              <Image
+                src={wordmarkSvg}
+                alt="TreeHacks Live logo"
+                className="h-8 w-auto"
+              />
+            </Link>
             <div className="ml-auto flex">
               <NavItem href="/">Schedule</NavItem>
-              <NavItem href="/packs">Devpost</NavItem>
-              <NavItem href="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit">
-                FAQs
-              </NavItem>
+              <NavItem href="/faq">FAQs</NavItem>
               <NavItem href="/resources">Resources</NavItem>
+              <NavItem href="/devpost">Devpost</NavItem>
             </div>
           </div>
         </div>
@@ -87,7 +89,7 @@ export default function Navbar() {
           <FontAwesomeIcon icon={faHammer} />
           <div className="text-xs">Resources</div>
         </MobileNavItem>
-        <MobileNavItem href="https://docs.google.com/document/d/162lC3yzvkURS1FZcVX-vpMckuWYkbqnoESZcPdxRdHk/edit">
+        <MobileNavItem href="/faq">
           <FontAwesomeIcon icon={faInfoCircle} />
           <div className="text-xs">FAQs</div>
         </MobileNavItem>
