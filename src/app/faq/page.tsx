@@ -13,7 +13,7 @@ export default function FAQPage() {
       </div>
       <div className="mx-auto mt-6 max-w-5xl px-4 sm:mt-12">
         <iframe
-          src="https://docs.google.com/document/d/e/2PACX-1vTblhMTCppm9vU9ouA6BQJt2mBK4srbLj5mokJ85-IghAYPyZHYt7aUkFI0BeGp2vtVZImAJtABt9mH/pub"
+          src="https://docs.google.com/document/d/e/2PACX-1vRveEVhm56haa6ehsLBh1enWGevsOIbcf7MuH_HIzSjcs71KSVvwd9FtZdNEabCqREO6uxzfOs51i5c/pub"
           className="h-[80vh] w-full rounded-xl border-0 bg-white"
         />
       </div>
